@@ -23,25 +23,25 @@ service KeymanagerListaGrpcService{
   rpc lista(ListaChavesPixRequest) returns (ListaChavesPixResponse) {}
 }
 
-enum TipoDeConta {
-  UNKNOWN_TIPO_CONTA = 0;
-  CONTA_CORRENTE = 1;
-  CONTA_POUPANCA = 2;
-}
-
-enum TipoChave {
-  UNKNOWN_TIPO_CHAVE = 0;
-  CPF = 1;
-  CELULAR = 2;
-  EMAIL = 3;
-  ALEATORIA = 4;
-}
-
 message RegistraChavePixRequest{
   string clienteId        = 1;
-  TipoChave tipoDeChave = 2;
+  TipoDeChave tipoDeChave = 2;
   string chave            = 3;
   TipoDeConta tipoDeConta = 4;
+
+  enum TipoDeChave {
+    UNKNOWN_TIPO_CHAVE = 0;
+    CPF = 1;
+    CELULAR = 2;
+    EMAIL = 3;
+    ALEATORIA = 4;
+  }
+  enum TipoDeConta {
+    UNKNOWN_TIPO_CONTA = 0;
+    CONTA_CORRENTE = 1;
+    CONTA_POUPANCA = 2;
+  }
+
 }
 
 message RegistraChavePixResponse {
@@ -73,3 +73,4 @@ message ListaChavesPixRequest{
 message ListaChavesPixResponse{
   string message = 1;
 }
+

@@ -1,3 +1,34 @@
 micronaut:
   application:
     name: keyManager
+
+datasources:
+  default:
+    url: ${DB_URL:`jdbc:postgresql://localhost:5432/pix`}
+    driverClassName: org.postgresql.Driver
+    username: ${DB_USER:`keycloak`}
+    password: ${DB_PASS:`password`}
+    dialect: POSTGRES
+jpa.default.properties.hibernate.hbm2ddl.auto: create
+
+
+#itau:
+#  contas:
+#    url: 'http://localhost:9091'
+#
+#bcb:
+#  pix:
+#    url: 'http://localhost:8082'
+
+#datasources:
+#  default:
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    driverClassName: org.postgresql.Driver
+#    username: keycloak
+#    password: password
+#    schema-generate: CREATE_DROP
+#    dialect: POSTGRES
+#
+#jpa.default.properties.hibernate.hdm2ddl.auto: create
+#jpa.default.properties.hibernate.show_sql: true
+#jpa.default.properties.hibernate.format.format_sql: true

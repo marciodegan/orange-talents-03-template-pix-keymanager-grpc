@@ -1,4 +1,6 @@
 plugins {
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.4.10"
+
     id("org.jetbrains.kotlin.jvm") version "1.4.32"
     id("org.jetbrains.kotlin.kapt") version "1.4.32"
     id("com.github.johnrengelman.shadow") version "7.0.0"
@@ -32,7 +34,17 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
-    testImplementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-http-client")
+
+    implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator")
+    implementation("org.hibernate:hibernate-validator:6.1.6.Final")
+
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+    runtime("io.micronaut.sql:micronaut-jdbc-hikari")
+    runtimeOnly("org.postgresql:postgresql")
+
+
+
 }
 
 
