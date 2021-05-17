@@ -1,4 +1,4 @@
-package br.com.zup.edu.pix.registra
+package br.com.zup.edu.pix
 
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator

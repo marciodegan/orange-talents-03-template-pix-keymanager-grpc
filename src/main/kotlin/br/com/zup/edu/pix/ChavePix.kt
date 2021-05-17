@@ -1,4 +1,4 @@
-package br.com.zup.edu.pix.registra
+package br.com.zup.edu.pix
 
 import java.time.LocalDateTime
 import java.util.*
@@ -33,8 +33,8 @@ class ChavePix(
 ) {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    @GeneratedValue
+    var id: UUID? = null
 
     @Column(nullable = false)
     val criadaEm: LocalDateTime = LocalDateTime.now()
