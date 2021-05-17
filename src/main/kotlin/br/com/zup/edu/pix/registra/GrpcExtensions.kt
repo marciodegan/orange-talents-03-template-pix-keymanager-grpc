@@ -1,8 +1,8 @@
 package br.com.zup.edu
 
+import br.com.zup.edu.pix.TipoDeChaveEnum
+import br.com.zup.edu.pix.TipoDeContaEnum
 import br.com.zup.edu.pix.registra.NovaChavePix
-import br.com.zup.edu.pix.registra.TipoDeChaveEnum
-import br.com.zup.edu.pix.registra.TipoDeContaEnum
 
 // extension function que converte p/ dto NovaChavePix
 fun RegistraChavePixRequest.toModel() : NovaChavePix {

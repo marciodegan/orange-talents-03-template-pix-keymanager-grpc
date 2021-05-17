@@ -2,6 +2,8 @@ package br.com.zup.edu.pix.registra
 
 import br.com.zup.edu.ContasDeClientesNoItauClient
 import br.com.zup.edu.exception.ChavePixExistenceException
+import br.com.zup.edu.pix.ChavePix
+import br.com.zup.edu.pix.ChavePixRepository
 import io.micronaut.validation.Validated
 import org.slf4j.LoggerFactory
 import javax.inject.Inject

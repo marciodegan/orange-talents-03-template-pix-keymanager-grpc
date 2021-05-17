@@ -1,6 +1,6 @@
 package br.com.zup.edu
 
-import br.com.zup.edu.pix.registra.ContaAssociada
+import br.com.zup.edu.pix.ContaAssociada
 
 class DadosDaContaResponse(
     val tipo: String,

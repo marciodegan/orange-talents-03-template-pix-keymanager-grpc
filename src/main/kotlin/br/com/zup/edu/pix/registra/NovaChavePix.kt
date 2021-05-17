@@ -2,6 +2,10 @@ package br.com.zup.edu.pix.registra
 
 import br.com.zup.edu.ValidPixKey
 import br.com.zup.edu.compartilhado.ValidUUID
+import br.com.zup.edu.pix.ChavePix
+import br.com.zup.edu.pix.ContaAssociada
+import br.com.zup.edu.pix.TipoDeChaveEnum
+import br.com.zup.edu.pix.TipoDeContaEnum
 import io.micronaut.core.annotation.Introspected
 import java.util.*
 import javax.validation.constraints.NotBlank
