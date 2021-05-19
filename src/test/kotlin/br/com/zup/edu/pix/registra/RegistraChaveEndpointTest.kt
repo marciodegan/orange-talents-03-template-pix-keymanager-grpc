@@ -1,6 +1,7 @@
 package br.com.zup.edu.pix.registra
 
 import br.com.zup.edu.*
+import br.com.zup.edu.pix.*
 import io.grpc.ManagedChannel
 import io.grpc.Status
 import io.grpc.StatusRuntimeException

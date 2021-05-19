@@ -38,4 +38,8 @@ class ChavePix(
 
     @Column(nullable = false)
     val criadaEm: LocalDateTime = LocalDateTime.now()
+
+    fun atualiza(key: String) {
+        this.chave = key
+    }
 }

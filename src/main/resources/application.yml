@@ -4,12 +4,12 @@ micronaut:
 
 datasources:
   default:
-    url: ${DB_URL:`jdbc:postgresql://localhost:5432/pix`}
+    url: ${DB_URL:`jdbc:postgresql://localhost:5432/pixdb`}
     driverClassName: org.postgresql.Driver
     username: ${DB_USER:`keycloak`}
     password: ${DB_PASS:`password`}
     dialect: POSTGRES
-jpa.default.properties.hibernate.hbm2ddl.auto: create
+jpa.default.properties.hibernate.hbm2ddl.auto: update
 jpa.default.properties.hibernate.show_sql: false
 jpa.default.properties.hibernate.format_sql: true
 
@@ -17,6 +17,9 @@ itau:
   client:
     url: 'http://localhost:9091/api/v1'
 
+bcb:
+  pix:
+    url: 'http://localhost:8082'
 
 
 #datasources:
