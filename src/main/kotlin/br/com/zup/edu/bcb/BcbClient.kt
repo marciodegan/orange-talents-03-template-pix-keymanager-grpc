@@ -4,7 +4,8 @@ import br.com.zup.edu.pix.ChavePix
 import br.com.zup.edu.pix.ContaAssociada
 import br.com.zup.edu.pix.TipoDeChaveEnum
 import br.com.zup.edu.pix.TipoDeContaEnum
-import io.micronaut.core.annotation.Introspected
+import br.com.zup.edu.pix.carrega.ChavePixInfo
+import br.com.zup.edu.pix.carrega.Instituicoes
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
@@ -19,18 +20,66 @@ import javax.validation.constraints.NotNull
 @Client(value = "\${bcb.pix.url}")
 interface BcbClient {
 
-    @Post("/api/v1/pix/keys",
+    @Post(
+        "/api/v1/pix/keys",
         produces = [MediaType.APPLICATION_XML],
         consumes = [MediaType.APPLICATION_XML]
     )
     fun registra(@Body request: BcbPixRequest): HttpResponse<BcbPixResponse>
 
-    @Delete("/api/v1/pix/keys/{key}",
+    @Delete(
+        "/api/v1/pix/keys/{key}",
         produces = [MediaType.APPLICATION_XML],
         consumes = [MediaType.APPLICATION_XML]
     )
-    fun deleta(@PathVariable key: String, @Body request: BcbPixDeleteRequest): HttpResponse<BcbPixDeleteResponse>
+    fun deleta(
+        @PathVariable key: String,
+        @Body request: BcbPixDeleteRequest
+    ): HttpResponse<BcbPixDeleteResponse>
 
+    @Get(
+        "/api/v1/pix/keys/{key}",
+        consumes = [MediaType.APPLICATION_XML]
+    )
+    fun findByKey(@PathVariable key: String): HttpResponse<PixKeyDetailsResponse>
+
+}
+
+data class BankAccount(
+    /**
+     * (participant) - ISPB (Identificador de Sistema de Pagamento Brasileiro) do ITAÚ UNIBANCO S.A --> [60701190].
+     **/
+    val participant: String,
+    val branch: String,
+    val accountNumber: String,
+    val accountType: AccountType
+)
+
+data class PixKeyDetailsResponse(
+    val keyType: PixKeyTypeEnum,
+    val key: String,
+    val bankAccount: BankAccount,
+    val owner: Owner,
+    val createdAt: LocalDateTime
+) {
+
+    fun toModel(): ChavePixInfo {
+        return ChavePixInfo(
+            tipo = keyType.domainType!!,
+            chave = this.key,
+            tipoDeConta = when (this.bankAccount.accountType) {
+                AccountType.CACC -> TipoDeContaEnum.CONTA_CORRENTE
+                AccountType.SVGS -> TipoDeContaEnum.CONTA_POUPANCA
+            },
+            conta = ContaAssociada(
+                instituicao = Instituicoes.nome(bankAccount.participant),
+                nomeDoTitular = owner.name,
+                cpfDoTitular = owner.taxIdNumber,
+                agencia = bankAccount.branch,
+                numeroDaConta = bankAccount.accountNumber
+            )
+        )
+    }
 }
 
 data class BcbPixDeleteRequest(
@@ -44,7 +93,6 @@ data class BcbPixDeleteResponse(
     val deletedAt: LocalDateTime
 )
 
-@Introspected
 data class BcbPixRequest(
     @field:NotNull
     @Enumerated(EnumType.STRING)
@@ -98,15 +146,6 @@ data class BcbPixResponse(
     val createdAt: LocalDateTime,
 )
 
-data class BankAccount(
-    /**
-     * (participant) - ISPB (Identificador de Sistema de Pagamento Brasileiro) do ITAÚ UNIBANCO S.A --> [60701190].
-     **/
-    val participant: String,
-    val branch: String,
-    val accountNumber: String,
-    val accountType: AccountType
-)
 
 enum class AccountType {
     CACC,

@@ -42,4 +42,6 @@ class ChavePix(
     fun atualiza(key: String) {
         this.chave = key
     }
+
+    fun pertenceAo(clienteId: UUID) = this.clienteId.equals(clienteId)
 }

@@ -29,13 +29,13 @@ class RemoveChavePixService(
         @NotBlank @ValidUUID(message = "Cliente ID em formato inválido") clienteId: String?,
         @NotBlank @ValidUUID(message = "Chave Pix em formato inválido") pixId: String?
     ) {
-        val pixId = UUID.fromString(pixId)
-        val clienteId = UUID.fromString(clienteId)
+        val pixIdUUID = UUID.fromString(pixId)
+        val clienteIdUUID = UUID.fromString(clienteId)
 
-        val chave = repository.findByIdAndClienteId(pixId, clienteId)
+        val chave = repository.findByIdAndClienteId(pixIdUUID, clienteIdUUID)
             .orElseThrow{ ChavePixNaoEncontradaException("Chave pix ou clienteID não encontrado(s)")}
 
-        repository.deleteById(pixId)
+        repository.deleteById(pixIdUUID)
         logger.info("Chave deletada no bd => ${chave.chave}")
 
         val request = BcbPixDeleteRequest(chave.chave)
