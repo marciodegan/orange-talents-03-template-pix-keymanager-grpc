@@ -41,15 +41,16 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     runtimeOnly("org.postgresql:postgresql")
-    // Tests - Junit
-    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
-    testImplementation("org.junit.jupiter:junit-jupiter-api")
-    testImplementation("io.micronaut.test:micronaut-test-junit5:2.3.3")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
+    // Tests
+    kaptTest "io.micronaut:micronaut-inject-java"
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("org.mockito:mockito-junit-jupiter:3.8.0")
     testImplementation("com.h2database:h2")
-    // Tests - Mockito
-    testImplementation("org.mockito:mockito-core:3.8.0")
-    implementation("org.mockito:mockito-junit-jupiter:3.10.0")
+    testImplementation("org.hamcrest:hamcrest-core:2.2")
+    testImplementation("org.testcontainers:junit-jupiter")
+
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
+
 }
 
 application {
